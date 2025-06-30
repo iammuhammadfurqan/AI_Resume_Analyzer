@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Analyzer & Cover Letter Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Enhanced animated background -->
+    <div class="bg-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Glowing orbs -->
+    <div class="glow-orb orb1"></div>
+    <div class="glow-orb orb2"></div>
+    <div class="glow-orb orb3"></div>
+
+    <div class="container">
+        <div class="glass-card">
+            <h1>
+                AI Resume Analyzer
+                <span class="title-decoration">✨</span>
+            </h1>
+            <p class="subtitle">Transform your resume into compelling cover letters with the power of AI</p>
+            
+            <div class="feature-highlights">
+                <div class="feature-item">
+                    <i class="fas fa-robot"></i>
+                    <span>AI-Powered Analysis</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-lightning-bolt"></i>
+                    <span>Instant Generation</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Smart Matching</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-download"></i>
+                    <span>Export Ready</span>
+                </div>
+            </div>
+            
+            <div class="button-container">
+                <button class="action-btn btn-secondary tooltip" id="load-sample" data-tooltip="Load example resume and job description">
+                    <i class="fas fa-magic"></i>
+                    Load Sample Data
+                </button>
+                <button class="action-btn btn-secondary tooltip" id="clear-form" data-tooltip="Clear all form fields">
+                    <i class="fas fa-trash"></i>
+                    Clear Form
+                </button>
+                <button class="action-btn btn-analyze tooltip" id="analyze-resume" data-tooltip="Analyze resume for insights">
+                    <i class="fas fa-search"></i>
+                    Analyze Resume
+                </button>
+            </div>
+
+            <div class="progress-bar" id="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+
+            <form action="/generate" method="post" id="main-form">
+                <div class="form-grid">
+                    <div class="form-section">
+                        <h2><span class="icon"><i class="fas fa-file-alt"></i></span>Your Resume</h2>
+                        <button type="button" class="action-btn btn-secondary" id="upload-resume-btn" style="margin-bottom: 15px;">
+                            <i class="fas fa-upload"></i> Upload Resume
+                        </button>
+                        <input type="file" id="resume-file-input" style="display: none;" accept=".pdf,.docx,.txt">
+                        <textarea id="resume" name="resume" placeholder="Paste your resume here, or upload a file above.">{{ resume if resume else '' }}</textarea>
+                        <div class="textarea-counter" id="resume-counter">0 words</div>
+                        
+                        <div class="analysis-panel" id="resume-analysis">
+                            <h3 style="color: white; margin-bottom: 15px; font-size: 1.1rem;">
+                                <i class="fas fa-chart-bar" style="margin-right: 8px;"></i>
+                                Resume Analysis
+                            </h3>
+                            <div class="analysis-stats" id="analysis-stats">
+                                <!-- Analysis results will be populated here -->
+                            </div>
+                            <div id="suggestions" style="color: rgba(255, 255, 255, 0.8); font-size: 14px; line-height: 1.6;">
+                                <!-- Suggestions will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h2><span class="icon"><i class="fas fa-briefcase"></i></span>Job Description</h2>
+                        <textarea id="job_description" name="job_description" placeholder="Paste the job description here... Include requirements, responsibilities, and company information.">{{ job_description if job_description else '' }}</textarea>
+                        <div class="textarea-counter" id="job-counter">0 words</div>
+                    </div>
+                </div>
+                
+                <button type="submit" id="generate-button">
+                    <span class="button-text">
+                        <i class="fas fa-rocket"></i>
+                        Generate Cover Letter
+                    </span>
+                    <span class="spinner" style="display: none;"></span>
+                </button>
+            </form>
+            
+            {% if error %}
+            <div class="error">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div>
+                    <h3 style="margin-bottom: 5px;">Error</h3>
+                    <p>{{ error }}</p>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if cover_letter %}
+            <div class="output">
+                <h2>
+                    <span>
+                        <i class="fas fa-sparkles" style="margin-right: 8px;"></i>
+                        Generated Cover Letter
+                    </span>
+                    <div class="output-actions">
+                        <button id="copy-button" class="tooltip" data-tooltip="Copy to clipboard">
+                            <i class="fas fa-copy"></i>
+                            Copy
+                        </button>
+                        <button id="download-button" class="tooltip" data-tooltip="Download as text file">
+                            <i class="fas fa-download"></i>
+                            Download
+                        </button>
+                    </div>
+                </h2>
+                <pre id="cover-letter">{{ cover_letter }}</pre>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

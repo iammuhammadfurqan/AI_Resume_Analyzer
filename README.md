@@ -1,55 +1,60 @@
-# AI Resume Analyzer & Cover Letter Generator
+# 🚀 AI Resume Analyzer & Cover Letter Generator 🚀
 
-A powerful Flask web application that uses AI to analyze resumes and generate personalized cover letters based on job descriptions.
+This advanced web application leverages the power of Large Language Models (LLMs) to automatically analyze resumes, match them against job descriptions, and generate compelling, personalized cover letters. It features a modern, animated user interface and robust backend processing.
 
-## ✨ Features
+![Screenshot](ss_images/Capture.PNG)
 
-- **AI-Powered Analysis**: Smart resume analysis with skill detection and scoring
-- **Instant Cover Letter Generation**: Creates personalized cover letters using OpenAI GPT
-- **Real-time Statistics**: Word count, skill detection, and readability scoring
-- **Modern UI**: Glassmorphism design with smooth animations and interactive elements
-- **Export Options**: Copy to clipboard or download as text file
-- **Responsive Design**: Works perfectly on desktop and mobile devices
-- **Sample Data**: Pre-loaded examples to test the functionality
+## ✨ Key Features
 
-## 🚀 Quick Start
+-   **🤖 AI-Powered Cover Letter Generation:** Uses GPT models (`gpt-4.1-mini`) to create tailored cover letters that highlight relevant skills and experience.
+-   **📄 Resume Upload & Parsing:** Supports `.pdf`, `.docx`, and `.txt` file uploads, automatically extracting the text for analysis.
+-   **🔍 Smart Resume Analysis:** An integrated API endpoint analyzes resume content, providing stats on word count, detected skills, and a readability score.
+-   **Fallback Mechanism:** Includes a template-based cover letter generator that ensures functionality even if the OpenAI API is unavailable.
+-   **Modern & Animated UI:** A beautiful "glassmorphism" interface built with dynamic JavaScript, featuring animated backgrounds, glowing orbs, and smooth transitions.
+-   **Rich User Experience:** Includes interactive elements like tooltips, progress bars, word counters, and success notifications.
+-   **📥 Download Functionality:** Allows users to download the generated cover letter as a `.txt` file.
 
-### Prerequisites
+## 📸 Application Showcase
 
-- Python 3.8 or higher
-- OpenAI API key (get one from [OpenAI Platform](https://platform.openai.com/))
+Here's a glimpse of the application's interface and capabilities:
 
-### Installation
+| Feature | Screenshot |
+| :--- | :---: |
+| **Main Interface** | ![Main UI](ss_images/Screenshot%202025-07-01%20002231.png) |
+| **Generated Output** | ![Generated Cover Letter](ss_images/Screenshot%202025-07-01%20002350.png) |
 
-1. **Clone or create the project structure:**
-```bash
-mkdir ai-resume-analyzer
-cd ai-resume-analyzer
-mkdir templates
-```
+## 🛠️ How to Run
 
-2. **Create the files:**
-   - Save the Flask backend code as `app.py`
-   - Save the HTML template as `templates/index.html`
-   - Save the requirements as `requirements.txt`
+Follow these steps to get the application running locally:
 
-3. **Install dependencies:**
-```bash
-pip install -r requirements.txt
-```
+1.  **Clone the Repository:**
+    ```bash
+    git clone https://github.com/iammuhammadfurqan/Resume_Analyzer.git
+    cd Resume_Analyzer
+    ```
 
-4. **Set up environment variables:**
-Create a `.env` file in the project root:
-```env
-OPENAI_API_KEY=your_openai_api_key_here
-FLASK_ENV=development
-FLASK_DEBUG=True
-```
+2.  **Set Up a Virtual Environment** (Recommended):
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+    ```
 
-5. **Run the application:**
-```bash
-python app.py
-```
+3.  **Install Dependencies:**
+    The project includes a `requirements.txt` file with all necessary packages.
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4.  **Configure Your Environment:**
+    Create a `.env` file in the root of the project. This file will store your secret API key.
+    ```
+    OPENAI_API_KEY="YOUR_OPENAI_API_KEY"
+    ```
+
+5.  **Run the Application:**
+    ```bash
+    python app.py
+    ```
 
 6. **Open your browser:**
 Navigate to `http://localhost:5000`
@@ -72,16 +77,22 @@ Navigate to `http://localhost:5000`
 | `FLASK_ENV` | Flask environment | `production` |
 | `FLASK_DEBUG` | Enable debug mode | `False` |
 
-## 📁 Project Structure
+## 📂 Project Structure
 
 ```
-ai-resume-analyzer/
-├── app.py                 # Flask backend application
-├── requirements.txt       # Python dependencies
-├── .env                  # Environment variables (create this)
+.
+├── app.py              # Main Flask application logic
+├── requirements.txt      # Python dependencies
+├── .env                  # For storing API keys (ignored by Git)
+├── .gitignore            # Specifies files to be ignored by Git
+├── static/
+│   ├── style.css       # Main stylesheet for the UI
+│   └── script.js       # JavaScript for frontend interactivity
 ├── templates/
-│   └── index.html        # Main HTML template
-└── README.md            # This file
+│   └── index.html      # Main HTML template
+├── uploads/              # Temporary storage for uploaded files (ignored by Git)
+└── ss_images/
+    └── ...             # Screenshots for the README
 ```
 
 ## 🎯 Usage
